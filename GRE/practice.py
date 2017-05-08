@@ -1,5 +1,5 @@
 import csv
-
+import os
 
 def read_csv(path):
     f = open(path, encoding='utf-8-sig')
@@ -31,12 +31,11 @@ def recommend():
 def write_user_data():
     f = open('user_data.csv', 'w', newline='', encoding='utf-8-sig')
     writer = csv.writer(f)
-    writer.writerow([user_accuracy])
+    writer.writerow([correct, count])
     writer.writerow(user_tags.keys())
     writer.writerow(user_tags.values())
     writer.writerow(user_questions.keys())
     writer.writerow(user_questions.values())
-    writer.writerow([count])
     f.close()
     print("User data has been recorded")
     return
@@ -67,23 +66,28 @@ for row in questions:
 user_tags = {}  # 用户{易错标签：做错标签的次数}
 user_accuracy = 1
 user_questions = {}
+correct = 0
 count = 0
-write_user_data()
+if not os.path.isfile('user_data.csv'):
+    write_user_data()
 
 
 # load user_data
 user_data = read_csv('user_data.csv')
-print("stuff in user data", user_data)
+# print("stuff in user data", user_data)
 user_accuracy = float(user_data[0][0])
 user_tags = dict(zip(user_data[1], [int(i) for i in user_data[2]]))
-print("loaded user tags", user_tags)
+# print("loaded user tags", user_tags)
 user_questions = dict(zip(user_data[3], [int(i) for i in user_data[4]]))
-print("loaded user questions", user_questions)
-count = user_data[5][0]
-print("loaded user count: ", count)
+# print("loaded user questions", user_questions)
+correct = int(user_data[0][0])
+count = int(user_data[0][1])
+if count != 0:
+    user_accuracy = correct/count
+# print("loaded user correct, count: ", correct, count)
 print("User data has been loaded")
 
-correct = 0
+
 while True:
     print(recommend())
     next_question = recommend()[0][0]
@@ -110,6 +114,6 @@ while True:
         user_questions[last_question] = bias
     else:
         user_questions[last_question] += bias
-    print(user_questions)
-    print(user_tags)
     count += 1
+    user_accuracy = correct / count
+    print("your accuracy is: ", user_accuracy)
