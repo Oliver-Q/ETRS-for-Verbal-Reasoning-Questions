@@ -1,5 +1,4 @@
 # recommendation-system
-http://www.voidcn.com/blog/gamer_gyt/article/p-6059292.html
 
 practice.py in GRE folder achieved that GRE verbal task can be smartly recommendated according to user's error-prone knowledge and English level.
 
