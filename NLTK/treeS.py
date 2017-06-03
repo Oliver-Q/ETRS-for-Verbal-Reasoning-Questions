@@ -9,8 +9,9 @@ Created on Sun May 28 17:23:48 2017
 from pattern.en import parsetree, Chunk
 from nltk.tree import Tree
 
-sentence = "In parts of the Arctic, the land grades into the landfast ice so _\
- that you can walk off the coast and not know you are over the hidden sea."
+sentence = "This author does not \
+permit them to obscure his comprehensive description of what we know \
+about our biosphere"
 
 tree = parsetree(sentence)
 
