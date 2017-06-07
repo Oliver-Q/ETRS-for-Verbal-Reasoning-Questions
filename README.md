@@ -1,4 +1,4 @@
-# recommendation-system
+# ETRS
 
 practice.py in GRE folder achieved that GRE verbal task can be smartly recommendated according to user's error-prone knowledge and English level.
 
